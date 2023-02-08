@@ -33,20 +33,17 @@ function App() {
       >
         글수정
       </button>
-      <div className="list">
-        <h4>
-          {title[0]} <span onClick={() => setLike(like + 1)}>👍</span> {like}
-        </h4>
-        <p>2월 17일 발행</p>
-      </div>
-      <div className="list">
-        <h4>{title[1]}</h4>
-        <p>2월 17일 발행</p>
-      </div>
-      <div className="list">
-        <h4 onClick={() => setModal(true)}>{title[2]}</h4>
-        <p>2월 17일 발행</p>
-      </div>
+
+      {title.map((txt) => {
+        return (
+          <div className="list">
+            <h4>
+              {txt} <span onClick={() => setLike(like + 1)}>👍</span> {like}
+            </h4>
+            <p>2월 17일 발행</p>
+          </div>
+        );
+      })}
 
       {modal ? <Modal /> : null}
     </div>
