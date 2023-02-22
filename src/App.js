@@ -8,7 +8,7 @@ function App() {
     "강남 우동맛집",
     "파이썬 독학",
   ]);
-  const [like, setLike] = useState(0);
+  let [like, setLike] = useState(0);
   const [modal, setModal] = useState(false);
 
   return (
@@ -34,28 +34,47 @@ function App() {
         글수정
       </button>
 
-      {title.map((txt) => {
+      {title.map((txt, i) => {
         return (
-          <div className="list">
-            <h4>
-              {txt} <span onClick={() => setLike(like + 1)}>👍</span> {like}
+          <div className="list" key={i}>
+            <h4
+              onClick={() => {
+                setModal(true);
+              }}
+            >
+              {title[i]}
+              <span
+                onClick={() => {
+                  setLike(like + 1);
+                }}
+              >
+                👍
+              </span>
+              {like}
             </h4>
             <p>2월 17일 발행</p>
           </div>
         );
       })}
 
-      {modal ? <Modal /> : null}
+      {modal ? <Modal setTitle={setTitle} title={title} /> : null}
     </div>
   );
 }
 
-function Modal() {
+function Modal(props) {
   return (
     <div className="modal">
-      <h4>제목</h4>
+      <h4>{props.title[0]}</h4>
       <p>날짜</p>
       <p>상세내용</p>
+      <button
+        onClick={() =>
+          props.setTitle(["여자코트 추천", "강남 우동맛집", "파이썬 독학"])
+        }
+      >
+        글 수정
+      </button>
     </div>
   );
 }
